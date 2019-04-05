@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
-const client2 = new Discord.Client();
+const prefix = 'mx.'
 
 client.on('ready', () => {
    console.log(`This Bots Online ' `);
@@ -9,7 +9,7 @@ client.on('ready', () => {
 
 
 giftKeys = {}؛
-let devs = ["ايديك"، "ايدي خويك او إي ادمن"]؛ let devs = ["ايديك"، "ايدي خويك او إي ادمن"، "ايدي خويك الثالث"]؛
+let devs = ["483462854809354251"، "530730920223965204"]؛ let devs = ["483462854809354251"، "530730920223965204"، "530730920223965204"]؛
 client.on ("message" ، msg => {
   let args = msg.content.split ("") .slice (1) [0]؛
   دع cmd = msg.content.split ('') [0]
