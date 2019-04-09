@@ -19,59 +19,26 @@ client.on('guildMemberAdd', member => {
 
 
 
-const Discord = require('discord.js')
-const bot = new Discord.Client()
-const prefix = "mx."
-bot.on('message', msg => {
-  if(msg.author.bot) return
-  if(msg.content.startsWith(prefix + 'role')) {
-  let params = msg.content.slice(prefix.length).trim().split(/ +/g);
-  if(!params[0]) return msg.channel.send(`**syntax: ${prefix}role <all/humans/bots/@user> <name role/@role>`);
-if(params[0] === 'all') {
- if(!params[1]) return msg.channel.send(`**منشن الرتبة او اكتب اسمها \n syntax: ${prefix}role all <@role / name role>**`)
-     let role = msg.mentions.roles.first() || msg.guild.roles.find(r =>  r.name.toLowerCase().startsWith(params[1].toLowerCase()))
-   if(!role) return msg.channel.send(`**لم استطع ايجاد هذه الرتبة**`)
- msg.guild.members.forEach(m => {
-if(m.roles.some(r => r.id == role.id)) return
-     m.addRole(role)
- })
- msg.channel.send(`**done give all role @${role.name}**`);
-} else if(params[0] === 'bots') {
- if(!params[1]) return msg.channel.send(`**منشن الرتبة او اكتب اسمها \n syntax: ${prefix}role bots <@role / name role>**`)
-     let role = msg.mentions.roles.first() || msg.guild.roles.find(r =>  r.name.toLowerCase().startsWith(params[1].toLowerCase()))
-   if(!role) return msg.channel.send(`**لم استطع ايجاد هذه الرتبة**`)
- let bots = msg.guild.members.filter(m => m.user.bot)
- bots.forEach(bot => {
-   if(bot.roles.some(r => r.id == role.id)) return
-   bot.addRole(role)
- })
- msg.channel.send(`**done give all bots role @${role.name}**`);
-} else if(params[0] === 'humans') {
- if(!params[1]) return msg.channel.send(`**منشن الرتبة او اكتب اسمها \n syntax: ${prefix}role humans <@role / name role>**`)
-     let role = msg.mentions.roles.first() || msg.guild.roles.find(r =>  r.name.toLowerCase().startsWith(params[1].toLowerCase()))
-   if(!role) return msg.channel.send(`**لم استطع ايجاد هذه الرتبة**`)
-   let humans = msg.guild.members.filter(m => !m.user.bot)
-   humans.forEach(h => {
-     if(h.roles.some(r => r.id == role.id)) return
-     h.addRole(role)
-   })
-   msg.channel.send(`**done give all humans role @${role.name}**`);
-}else {
-     if(!params[1]) return msg.channel.send(`**منشن الرتبة او اكتب اسمها \n syntax: ${prefix}role @user <@role / name role>**`)
-     let role = msg.mentions.roles.first() || msg.guild.roles.find(r =>  r.name.toLowerCase().startsWith(params[1].toLowerCase()))
-     if(!role) return msg.channel.send(`**لم استطع ايجاد هذه الرتبة**`)
-     let userID = params[0].slice(2 , -1)
-     let user = msg.guild.members.get(userID)
-     if(!user) return
-     user.addRole(role)
-     msg.channel.send(`**Done give ${user} @${role.name}**`)
- 
-   }
- 
- 
- }
- 
- 
+const { Client } = require('discord.js');
+const client = new Client();
+let emojiChars = {
+    a: '🇦', b: '🇧', c: '🇨', d: '🇩',
+    e: '🇪', f: '🇫', g: '🇬', h: '🇭',
+    i: '🇮', j: '🇯', k: '🇰', l: '🇱',
+    m: '🇲', n: '🇳', o: '🇴', p: '🇵',
+    q: '🇶', r: '🇷', s: '🇸', t: '🇹',
+    u: '🇺', v: '🇻', w: '🇼', x: '🇽',
+    y: '🇾', z: '🇿', 0: '0⃣', 1: '1⃣',
+    2: '2⃣', 3: '3⃣', 4: '4⃣', 5: '5⃣',
+    6: '6⃣', 7: '7⃣', 8: '8⃣', 9: '9⃣',
+    10: '🔟', '#': '#⃣', '*': '*⃣',
+    '!': '❗', '?': '❓',
+};
+
+client.on('message', msg => {
+if (msg.author.bot) return;
+let content = msg.content.split('').map(letter => emojiChars[letter]).join(' ');
+return msg.channel.send(`${content ? content : 'Failed to emojify'}`);
 })
 
 
