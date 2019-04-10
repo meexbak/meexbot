@@ -3,7 +3,7 @@ const client = new Discord.Client();
 const prefix = 'mx.'
 
 client.on('ready', () => {
-   console.log(`This Bots Online ' `);
+   console.log(`This Bots Online`);
 });
 
 
